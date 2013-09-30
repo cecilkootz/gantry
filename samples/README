@@ -1,0 +1,34 @@
+Gantry::Samples
+===========================
+
+These are the Gantry samples.  All the samples are presented together
+via a single application.  The individual pages in the application present
+different examples, showing how to perform common tasks with Gantry.
+
+There are explanations of the samples in:
+
+    Gantry::Docs::Cookbook.pod
+
+INSTALLATION for the samples is not necessary, chdir into the samples directory
+and run the following command
+
+To run this application type:
+
+    > ./app.server
+
+DEPENDENCIES
+
+The samples require a variety of other modules from Gantry and CPAN.
+See the source for the sample you are interested in.
+
+COPYRIGHT AND LICENCE
+
+Put the correct copyright and license info here.
+
+Copyright (c) 2006 by Timotheus Keefer
+
+
+This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself, either Perl version 5.8.6 or,
+at your option, any later version of Perl 5 you may have available.
+

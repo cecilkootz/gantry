@@ -1,0 +1,41 @@
+CREATE TABLE user (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    active INTEGER,
+    username varchar,
+    password varchar,
+    email varchar,
+    fname varchar,
+    lname varchar,
+    created datetime,
+    modified datetime
+);
+
+INSERT INTO user ( active, username, password, email, fname, lname )
+    VALUES ( 1, 'demo', 'changeme', 'mars@imapi.com', 'Veronica', 'Mars' );
+
+INSERT INTO user ( active, username, password, email, fname, lname )
+    VALUES ( 1, 'test', 'test', 'test@test.com', 'test', 'test' );
+
+CREATE TABLE user_group (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    ident varchar,
+    description varchar,
+    created datetime,
+    modified datetime
+);
+
+INSERT INTO user_group ( ident, description )
+    VALUES ( 'admin', 'my test admin group' );
+
+CREATE TABLE user_user_group (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user INTEGER,
+    user_group INTEGER
+);
+CREATE TABLE item (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    descr varchar,
+    price varchar,
+    user_id INTEGER
+);
+

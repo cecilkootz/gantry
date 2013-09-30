@@ -1,0 +1,20 @@
+<div style="padding: 10px">
+
+    <h3>AuthCoookie w/ SQLite</h3>
+    <p>
+        This auth sample demonstrates authentication with Gatnry::Plugins::AuthCookie
+        using SQLite. see docs/Gantry-Samples.gantry.conf for the 
+        config information.
+    </p>
+    <br />
+    <h4>
+        Use test/test to login or <a href="/user">create your own username/password</a>.        
+    </h4>
+    
+    <ul>
+    <li><a href="[% self.location %]/open">Open</a></li>
+    <li><a href="[% self.location %]/optional">Optional</a> 
+    <li><a href="[% self.location %]/closed">Closed</a> 
+    </li>
+    </ul>
+</div>

@@ -1,0 +1,51 @@
+<script type="text/javascript">
+
+function ajax ( uri ) {
+
+    $.ajax({
+        type: "GET",
+        url: uri,
+        data: "",
+        success: function(msg){
+            $('#mytime').empty();
+            $('#mytime').append( msg );
+        },
+        error: function(msg){
+            $('#mytime').empty();
+            $('#mytime').append( msg );
+        }        
+     });
+              
+}
+
+</script>
+
+<div style="padding: 10px">
+
+    <h3>Here are several simple ajax requests</h3>
+
+    <ul style="padding: 10px 0 0 10px">
+        <li>
+        <a href="#" 
+        onclick="javascript: ajax( '[% self.location %]/content' );">
+        Server time
+        </a>
+        </li>
+        <li>
+        <a href="#" 
+        onclick="javascript: ajax( '[% self.location %]/version' );">
+        Gantry version
+        </a>
+        </li>    
+        <li>
+        <a href="#" 
+        onclick="javascript: ajax( '[% self.location %]/badcontent' );">
+        ajax request with error
+        </a>
+        </li>
+    </ul>
+    
+    <br />
+    <p id="mytime"></p>
+    
+</div>

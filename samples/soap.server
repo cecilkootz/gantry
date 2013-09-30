@@ -1,0 +1,33 @@
+#!/usr/bin/perl
+use strict;
+
+use lib qw( lib );
+
+use Gantry::Samples qw{
+    -Engine=CGI
+    -TemplateEngine=TT
+};
+
+use Gantry::Server;
+use Gantry::Engine::CGI;
+
+my $cgi = Gantry::Engine::CGI->new( {
+    config => {},
+    locations => {
+        '/GantrySoapService' => 'Gantry::Samples::SOAP',
+    },
+} );
+
+my $port = shift || 8080;
+
+my $server = Gantry::Server->new( $port );
+$server->set_engine_object( $cgi );
+
+print STDERR "Available urls:\n";
+foreach my $url ( sort keys %{ $cgi->{ locations } } ) {
+    print STDERR "  http://localhost:${port}$url\n";
+}
+print STDERR "\n";
+
+$server->run();
+

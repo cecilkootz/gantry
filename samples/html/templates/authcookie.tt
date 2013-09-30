@@ -1,0 +1,20 @@
+<div style="padding: 10px">
+
+    <h3>AuthCoookie w/ Authen::Htpasswd</h3>
+
+    <p>
+        This auth sample demonstrates authentication with Gatnry::Plugins::AuthCookie
+        using Authen::Htpasswd file. See this controllers init() for the 
+        auth_file config information.
+    </p>
+    <p>
+        A sample app.htpasswd has been supplied in the gantry samples directory.
+        There's also an existing username/password, test/test, that can be used.
+    </p>
+
+    <ul>
+    <li><a href="[% self.location %]/open">Open</a></li>
+    <li><a href="[% self.location %]/closed">Closed</a> 
+    </li>
+    
+</ul>

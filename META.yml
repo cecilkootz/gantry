@@ -1,0 +1,362 @@
+---
+abstract: 'Web application framework for mod_perl, cgi, etc.'
+author:
+  - 'Tim Keefer <tkeefer@gmail.com>'
+  - 'Phil Crow <philcrow2000@yahoo.com>'
+build_requires:
+  Test::Exception: 0
+  Test::More: 0
+configure_requires:
+  Module::Build: 0.38
+dynamic_config: 1
+generated_by: 'Module::Build version 0.38, CPAN::Meta::Converter version 2.110930'
+license: perl
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: Gantry
+provides:
+  Gantry:
+    file: lib/Gantry.pm
+    version: 3.82
+  Gantry::Build:
+    file: lib/Gantry/Build.pm
+    version: 0
+  Gantry::Conf:
+    file: lib/Gantry/Conf.pm
+    version: 0
+  Gantry::Conf::Provider:
+    file: lib/Gantry/Conf/Provider.pm
+    version: 0
+  Gantry::Conf::Provider::FlatFile::Config::General:
+    file: lib/Gantry/Conf/Provider/FlatFile/Config/General.pm
+    version: 0
+  Gantry::Conf::Provider::FlatFile::Config::Tiny:
+    file: lib/Gantry/Conf/Provider/FlatFile/Config/Tiny.pm
+    version: 0
+  Gantry::Conf::Provider::HTTP:
+    file: lib/Gantry/Conf/Provider/HTTP.pm
+    version: 0
+  Gantry::Conf::Provider::HTTP::Config::General:
+    file: lib/Gantry/Conf/Provider/HTTP/Config/General.pm
+    version: 0
+  Gantry::Conf::Provider::ParamBuilder:
+    file: lib/Gantry/Conf/Provider/ParamBuilder.pm
+    version: 0
+  Gantry::Conf::Provider::PerlSetVar:
+    file: lib/Gantry/Conf/Provider/PerlSetVar.pm
+    version: 0
+  Gantry::Conf::Provider::SQL::PostgreSQL:
+    file: lib/Gantry/Conf/Provider/SQL/PostgreSQL.pm
+    version: 0
+  Gantry::Control:
+    file: lib/Gantry/Control.pm
+    version: 0
+  Gantry::Control::C::Access:
+    file: lib/Gantry/Control/C/Access.pm
+    version: 0
+  Gantry::Control::C::AuthenBase:
+    file: lib/Gantry/Control/C/AuthenBase.pm
+    version: 0
+  Gantry::Control::C::AuthenCDBI:
+    file: lib/Gantry/Control/C/AuthenCDBI.pm
+    version: 0
+  Gantry::Control::C::AuthenRegular:
+    file: lib/Gantry/Control/C/AuthenRegular.pm
+    version: 0
+  Gantry::Control::C::Authz::PageBasedBase:
+    file: lib/Gantry/Control/C/Authz/PageBasedBase.pm
+    version: 0
+  Gantry::Control::C::Authz::PageBasedCDBI:
+    file: lib/Gantry/Control/C/Authz/PageBasedCDBI.pm
+    version: 0
+  Gantry::Control::C::Authz::PageBasedRegular:
+    file: lib/Gantry/Control/C/Authz/PageBasedRegular.pm
+    version: 0
+  Gantry::Control::C::AuthzBase:
+    file: lib/Gantry/Control/C/AuthzBase.pm
+    version: 0
+  Gantry::Control::C::AuthzCDBI:
+    file: lib/Gantry/Control/C/AuthzCDBI.pm
+    version: 0
+  Gantry::Control::C::AuthzRegular:
+    file: lib/Gantry/Control/C/AuthzRegular.pm
+    version: 0
+  Gantry::Control::C::Groups:
+    file: lib/Gantry/Control/C/Groups.pm
+    version: 0
+  Gantry::Control::C::Pages:
+    file: lib/Gantry/Control/C/Pages.pm
+    version: 0
+  Gantry::Control::C::Users:
+    file: lib/Gantry/Control/C/Users.pm
+    version: 0
+  Gantry::Control::Model::GEN::auth_group_members:
+    file: lib/Gantry/Control/Model/GEN/auth_group_members.pm
+    version: 0
+  Gantry::Control::Model::GEN::auth_groups:
+    file: lib/Gantry/Control/Model/GEN/auth_groups.pm
+    version: 0
+  Gantry::Control::Model::GEN::auth_pages:
+    file: lib/Gantry/Control/Model/GEN/auth_pages.pm
+    version: 0
+  Gantry::Control::Model::GEN::auth_users:
+    file: lib/Gantry/Control/Model/GEN/auth_users.pm
+    version: 0
+  Gantry::Control::Model::auth_group_members:
+    file: lib/Gantry/Control/Model/auth_group_members.pm
+    version: 0
+  Gantry::Control::Model::auth_group_members_cdbi:
+    file: lib/Gantry/Control/Model/auth_group_members_cdbi.pm
+    version: 0
+  Gantry::Control::Model::auth_groups:
+    file: lib/Gantry/Control/Model/auth_groups.pm
+    version: 0
+  Gantry::Control::Model::auth_groups_cdbi:
+    file: lib/Gantry/Control/Model/auth_groups_cdbi.pm
+    version: 0
+  Gantry::Control::Model::auth_pages:
+    file: lib/Gantry/Control/Model/auth_pages.pm
+    version: 0
+  Gantry::Control::Model::auth_pages_cdbi:
+    file: lib/Gantry/Control/Model/auth_pages_cdbi.pm
+    version: 0
+  Gantry::Control::Model::auth_users:
+    file: lib/Gantry/Control/Model/auth_users.pm
+    version: 0
+  Gantry::Control::Model::auth_users_cdbi:
+    file: lib/Gantry/Control/Model/auth_users_cdbi.pm
+    version: 0
+  Gantry::Engine::CGI:
+    file: lib/Gantry/Engine/CGI.pm
+    version: 0
+  Gantry::Engine::MP13:
+    file: lib/Gantry/Engine/MP13.pm
+    version: 0
+  Gantry::Engine::MP20:
+    file: lib/Gantry/Engine/MP20.pm
+    version: 0
+  Gantry::Exception:
+    file: lib/Gantry/Exception.pm
+    version: 0
+  Gantry::Init:
+    file: lib/Gantry/Init.pm
+    version: 0
+  Gantry::Plugins::AjaxCRUD:
+    file: lib/Gantry/Plugins/AjaxCRUD.pm
+    version: 0
+  Gantry::Plugins::AjaxFORM:
+    file: lib/Gantry/Plugins/AjaxFORM.pm
+    version: 0
+  Gantry::Plugins::AuthCookie:
+    file: lib/Gantry/Plugins/AuthCookie.pm
+    version: 0
+  Gantry::Plugins::AuthCookie::AuthUserObject:
+    file: lib/Gantry/Plugins/AuthCookie.pm
+    version: 0
+  Gantry::Plugins::AutoCRUD:
+    file: lib/Gantry/Plugins/AutoCRUD.pm
+    version: 0
+  Gantry::Plugins::AutoCRUDHelper::CDBI:
+    file: lib/Gantry/Plugins/AutoCRUDHelper/CDBI.pm
+    version: 0
+  Gantry::Plugins::AutoCRUDHelper::DBIxClass:
+    file: lib/Gantry/Plugins/AutoCRUDHelper/DBIxClass.pm
+    version: 0
+  Gantry::Plugins::CRUD:
+    file: lib/Gantry/Plugins/CRUD.pm
+    version: 0
+  Gantry::Plugins::Cache:
+    file: lib/Gantry/Plugins/Cache.pm
+    version: 0
+  Gantry::Plugins::Cache::FastMmap:
+    file: lib/Gantry/Plugins/Cache/FastMmap.pm
+    version: 0
+  Gantry::Plugins::Cache::Memcached:
+    file: lib/Gantry/Plugins/Cache/Memcached.pm
+    version: 0
+  Gantry::Plugins::Cache::Storable:
+    file: lib/Gantry/Plugins/Cache/Storable.pm
+    version: 0
+  Gantry::Plugins::Calendar:
+    file: lib/Gantry/Plugins/Calendar.pm
+    version: 0
+  Gantry::Plugins::DBIxClassConn:
+    file: lib/Gantry/Plugins/DBIxClassConn.pm
+    version: 0
+  Gantry::Plugins::PageCache:
+    file: lib/Gantry/Plugins/PageCache.pm
+    version: 0
+  Gantry::Plugins::SOAP::Doc:
+    file: lib/Gantry/Plugins/SOAP/Doc.pm
+    version: 0
+  Gantry::Plugins::SOAP::RPC:
+    file: lib/Gantry/Plugins/SOAP/RPC.pm
+    version: 0
+  Gantry::Plugins::Shibboleth:
+    file: lib/Gantry/Plugins/Shibboleth.pm
+    version: 0
+  Gantry::Plugins::Shibboleth::AuthUserObject:
+    file: lib/Gantry/Plugins/Shibboleth.pm
+    version: 0
+  Gantry::Plugins::Static:
+    file: lib/Gantry/Plugins/Static.pm
+    version: 0
+  Gantry::Plugins::Validate:
+    file: lib/Gantry/Plugins/Validate.pm
+    version: 0
+  Gantry::Server:
+    file: lib/Gantry/Server.pm
+    version: 0
+  Gantry::Server::Tier:
+    file: lib/Gantry/Server.pm
+    version: 0
+  Gantry::Stash:
+    file: lib/Gantry/Stash.pm
+    version: 0
+  Gantry::Stash::Controller:
+    file: lib/Gantry/Stash/Controller.pm
+    version: 0
+  Gantry::Stash::View:
+    file: lib/Gantry/Stash/View.pm
+    version: 0
+  Gantry::Stash::View::Form:
+    file: lib/Gantry/Stash/View/Form.pm
+    version: 0
+  Gantry::State::Constants:
+    file: lib/Gantry/State/Constants.pm
+    version: 0
+  Gantry::State::Default:
+    file: lib/Gantry/State/Default.pm
+    version: 0
+  Gantry::State::Exceptions:
+    file: lib/Gantry/State/Exceptions.pm
+    version: 0
+  Gantry::State::Simple:
+    file: lib/Gantry/State/Simple.pm
+    version: 0
+  Gantry::Template::Default:
+    file: lib/Gantry/Template/Default.pm
+    version: 0
+  Gantry::Template::Framing:
+    file: lib/Gantry/Template/Framing.pm
+    version: 0
+  Gantry::Template::TT:
+    file: lib/Gantry/Template/TT.pm
+    version: 0
+  Gantry::Utils::AuthCDBI:
+    file: lib/Gantry/Utils/AuthCDBI.pm
+    version: 0
+  Gantry::Utils::CDBI:
+    file: lib/Gantry/Utils/CDBI.pm
+    version: 0
+  Gantry::Utils::CRON:
+    file: lib/Gantry/Utils/CRON.pm
+    version: 0
+  Gantry::Utils::CRUDHelp:
+    file: lib/Gantry/Utils/CRUDHelp.pm
+    version: 0
+  Gantry::Utils::Captcha:
+    file: lib/Gantry/Utils/Captcha.pm
+    version: 0
+  Gantry::Utils::Crypt:
+    file: lib/Gantry/Utils/Crypt.pm
+    version: 0
+  Gantry::Utils::DB:
+    file: lib/Gantry/Utils/DB.pm
+    version: 0
+  Gantry::Utils::DBConnHelper:
+    file: lib/Gantry/Utils/DBConnHelper.pm
+    version: 0
+  Gantry::Utils::DBConnHelper::MP13:
+    file: lib/Gantry/Utils/DBConnHelper/MP13.pm
+    version: 0
+  Gantry::Utils::DBConnHelper::MP20:
+    file: lib/Gantry/Utils/DBConnHelper/MP20.pm
+    version: 0
+  Gantry::Utils::DBConnHelper::Script:
+    file: lib/Gantry/Utils/DBConnHelper/Script.pm
+    version: 0
+  Gantry::Utils::DBIxClass:
+    file: lib/Gantry/Utils/DBIxClass.pm
+    version: 0
+  Gantry::Utils::FormErrors:
+    file: lib/Gantry/Utils/FormErrors.pm
+    version: 0
+  Gantry::Utils::FormMunger:
+    file: lib/Gantry/Utils/FormMunger.pm
+    version: 0
+  Gantry::Utils::HTML:
+    file: lib/Gantry/Utils/HTML.pm
+    version: 0
+  Gantry::Utils::Model:
+    file: lib/Gantry/Utils/Model.pm
+    version: 0
+  Gantry::Utils::Model::Auth:
+    file: lib/Gantry/Utils/Model/Auth.pm
+    version: 0
+  Gantry::Utils::Model::Regular:
+    file: lib/Gantry/Utils/Model/Regular.pm
+    version: 0
+  Gantry::Utils::ModelHelper:
+    file: lib/Gantry/Utils/ModelHelper.pm
+    version: 0
+  Gantry::Utils::PODViewer:
+    file: lib/Gantry/Utils/PODViewer.pm
+    version: 0
+  Gantry::Utils::PerlbalFixup:
+    file: lib/Gantry/Utils/PerlbalFixup.pm
+    version: 0
+  Gantry::Utils::SQL:
+    file: lib/Gantry/Utils/SQL.pm
+    version: 0
+  Gantry::Utils::TablePerms:
+    file: lib/Gantry/Utils/TablePerms.pm
+    version: 0
+  Gantry::Utils::Threeway:
+    file: lib/Gantry/Utils/Threeway.pm
+    version: 0
+  Gantry::Utils::Validate:
+    file: lib/Gantry/Utils/Validate.pm
+    version: 0
+  My::View:
+    file: lib/Gantry/Utils/PODViewer.pm
+    version: 0
+  Template::Plugin::GantryAuthCookie:
+    file: lib/Template/Plugin/GantryAuthCookie.pm
+    version: 0
+  controller:
+    file: lib/Gantry/Stash/Controller.pm
+    version: 0
+  form:
+    file: lib/Gantry/Stash/View/Form.pm
+    version: 0
+  stash:
+    file: lib/Gantry/Stash.pm
+    version: 0
+  view:
+    file: lib/Gantry/Stash/View.pm
+    version: 0
+requires:
+  CGI::Simple: 0
+  Config::General: 2.31
+  Crypt::CBC: 0
+  DBI: 0
+  Data::FormValidator: 0
+  Data::UUID: 0
+  Date::Calc: 0
+  File::Copy::Recursive: 0
+  HTML::Prototype: 0
+  HTML::SuperForm: 0
+  HTTP::Server::Simple::CGI: 0
+  Hash::Merge: 0
+  JSON: 0
+  Mail::RFC822::Address: 0
+  Sub::Install: 0
+  Template: 2.0
+  Template::Plugin::HTML::SuperForm: 0
+  URI: 0
+  perl: 5.008000
+resources:
+  license: http://dev.perl.org/licenses/
+version: 3.82

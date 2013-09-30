@@ -1,0 +1,176 @@
+[%
+    title = view.title;
+
+    colspan = ( view.data.headings.size || 0 );
+
+    UNLESS view.data.no_options;
+        colspan = colspan + 1;
+    END;
+
+    pho_colspan = colspan;
+
+    hide_preheadings = self.params.hide_preheadings;
+    
+    UNLESS js_files.defined;
+        js_files = [];
+    END;
+    
+    FOREACH file IN view.data.javascript_files;
+        js_files.push(file);
+    END;
+    
+    UNLESS css_files.defined;
+        css_files = [];
+    END;
+    
+    FOREACH file IN view.data.css_files;
+        css_files.push({ 'href' => file });
+    END;    
+%]
+
+[% IF view.data.overheading.match( '.+' ) %]
+<h3>[% view.data.overheading %]</h3>
+[% END %]
+
+[% IF view.data.search_fields %]
+<div class="box">
+    <!-- ADD the search form generation code here -->
+</div>
+[% END %]
+[%- IF self.fish_config( 'show_dev_navigation' ) %]
+<table class="dev_nav">
+    <tr>
+    <td>
+
+        <select id="linkMenu"
+            onchange="window.location = this.options[this.selectedIndex].value">
+            [% FOREACH page IN self.site_links.sort( 'label' ) %]
+            <option value='[% page.link %]'
+                [% page.link == self.location ? 'selected="selected"' : '' %]>
+                [%- page.label %] </option>
+            [% END %]
+        </select>
+
+        [%- IF view.data.livesearch %]
+        <input type="text"   name="livesearch" id="livesearch" value="" />
+        <input type="button" name="search" value="search"
+            onclick="javascript: livesearch();">
+        [%- END %]
+    </td>
+</tr>
+</table>
+[%- ELSIF view.data.livesearch %]
+<table id="livesearch-container">
+    <tr>
+        <td>
+            <input type="text"   name="livesearch" id="livesearch" value="" />
+            <input type="button" name="search" value="search"
+                onclick="javascript: livesearch();">
+        </td>
+    </tr>
+</table>
+[%- END %]
+
+<div class="box">
+    <table id="[% view.data.id || 'results' %]" class="results [% view.data.class %]">
+        <thead>
+        [% UNLESS view.data.no_pre_headings %]
+            <tr class="pre-hdr-row">
+                [% IF view.data.pre_headings.size && view.data.pre_headings.size > 0 && ! hide_preheadings %]
+                    [% FOREACH pre_heading IN view.data.pre_headings %]
+                        <td class="hdr [% pre_heading.class %]" [% IF pre_heading.colspan; 'colspan="' _ pre_heading.colspan _ '"'; pho_colspan = pho_colspan - pre_heading.colspan; END %]>[% pre_heading.text || pre_heading %]</td>
+
+                        [% IF loop.last && view.data.pre_header_options.size > 0 %]
+                            <td class="rhdr [% IF pre_heading.class; 'r' _ pre_heading.class; END %]" colspan="[% pho_colspan %]">
+                            [% FOREACH option IN view.data.pre_header_options %]
+                                [% "[" IF loop.first %]
+                                [% IF option.link %]
+                                <a href="[% option.link %]">[% option.text %]</a>
+                                [% ELSE %]
+                                [% option.text %]
+                                [% END %]
+                                [% "|" IF ! loop.last %]
+                                [% "]" IF loop.last %]
+                            [% END %]
+                            </td>
+                        [% END %]
+
+                    [% END %]
+                [% ELSE %]
+                    <td class="hdr [% pre_heading.class %]" colspan="[% colspan %]">&nbsp;</td>
+                [% END %]
+            </tr>
+        [% END %]
+
+        <tr class="hdr-row">
+            [% FOREACH heading IN view.data.headings %]
+                <th class="hdr [% heading.class %]"[% IF heading.title %] title="[% heading.title %]"[% END %]>[% IF heading.text.defined; heading.text; ELSE; heading; END; %]</th>
+                [% IF loop.last && ! view.data.no_options  %]
+                    <th class="rhdr [% IF heading.class; 'r' _ heading.class; END %]"[% IF heading.title %] title="[% heading.title %]"[% END %]>
+                    [% IF view.data.header_options %]
+                        [% FOREACH option IN view.data.header_options %]
+                            [% "[" IF loop.first %]
+                            [%
+                                rel_attr = '';
+                                
+                                IF option.rel;
+                                    rel_attr = 'rel="' _ option.rel _ '" ';
+                                END;
+                            %]
+                            <a href="[% option.link %]" [% rel_attr %]>[% option.text %]</a>
+                            [% "|" IF ! loop.last %]
+                            [% "]" IF loop.last %]
+                        [% END %]
+                    [% ELSE %]
+                        &nbsp;
+                    [% END %]
+                    </th>
+                [% END %]
+
+            [% END %]
+        </tr>
+        </thead>
+
+        <tbody>
+        [% counter = 0 %]
+        [% FOREACH row IN view.data.rows %]
+            [% counter = counter + 1 %]
+            [% IF loop.last; last_elem = 1; ELSE; last_elem = 0; END; %]
+        <tr [% IF row.id; 'id="' _ row.id _ '"'; END; %] class="results-row [% UNLESS (row.class && row.class.match('(?i)(warning|highlighted)-row')) %]alt-bg[% (counter % 2 == 0) ? '0' : '1' %][% END %] [% row.class %]">
+            [% FOREACH elem IN row.data %]
+                <td [% IF elem.id; 'id="' _ elem.id _ '"'; END; %] class="dta [% elem.class %][% IF last_elem; ' last'; END; %]" [% row.td_style %] [% IF elem.colspan; 'colspan="' _ elem.colspan _ '"'; END %]>[% IF elem.text.defined; elem.text; ELSE; elem; END; %]</td>
+                [% IF loop.last && ! view.data.no_options %]
+                    <td [% IF elem.id; 'id="' _ elem.id _ '"'; END; %] class="rdta [% IF elem.class; 'r' _ elem.class; END;%][% IF last_elem; ' last'; END; %]" [% row.td_style %] [% IF elem.colspan; 'colspan="' _ elem.colspan _ '"'; END %]>
+                    [% IF row.options %]
+                        [% FOREACH option IN row.options %]
+                            [%
+                                rel_attr = '';
+                                
+                                IF option.rel;
+                                    rel_attr = 'rel="' _ option.rel _ '" ';
+                                END;
+                            %]
+                            [% "[" IF loop.first %]
+                            <a href="[% option.link %]" [% rel_attr %]>[% option.text %]</a>
+                            [% "|" IF ! loop.last %]
+                            [% "]" IF loop.last %]
+                        [% END %]
+                    [% ELSE %]
+                        &nbsp;
+                    [% END %]
+                    </td>
+                [% END %]
+            [% END %]
+        </tr>
+        [% END %]
+
+        [% IF view.data.rows == '' %]
+            <tr class="no-data"><td colspan="[% colspan %]">No Data</td></tr>
+        [% END %]
+
+        </tbody>
+    </table>
+
+    [% INCLUDE paging.ttc %]
+
+</div>

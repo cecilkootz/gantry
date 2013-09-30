@@ -1,0 +1,14 @@
+Revision history for Perl web application Examples
+0.05
+    
+0.04 Sat Mar 24 09:47:48 CDT 2007
+    - replaced dojo with jquery
+    
+0.03 Tue Oct 24 13:40:49 CDT 2006
+    - added AuthCookie example
+    
+0.02  Tue Oct 17 11:12:10 CDT 2006
+    - added file upload example
+    
+0.01  Mon Oct 16 13:25:28 2006
+    - original version created with bigtop

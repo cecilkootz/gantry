@@ -1,0 +1,296 @@
+config {
+    engine MP20;
+    template_engine TT;
+    plugins `AuthCookie Static`;
+    Conf Gantry { conffile `docs/app.gantry.conf`; instance samples; }
+    HttpdConf Gantry { gantry_conf 1; }
+    Init Std {  }
+    SQL SQLite {  }
+    SQL Postgres {  }
+    SQL MySQL {  }
+    CGI Gantry { gen_root 1; with_server 1; flex_db 1; gantry_conf 1; }
+    Control Gantry { dbix 1; }
+    Model GantryDBIxClass {  }
+    SiteLook GantryDefault { no_gen 1; }
+}
+app Gantry::Samples {
+    config {
+        dbconn `dbi:SQLite:dbname=app.db` => no_accessor;
+        template_wrapper `genwrapper.tt` => no_accessor;
+        doc_rootp `/static` => no_accessor;
+        doc_root html => no_accessor;
+        auth_user_field username;
+        auth_user_password username;
+        auth_table user => no_accessor;
+        auth_group_table user_group => no_accessor;
+        auth_group_join_table user_user_group => no_accessor;
+        app_name `Samples`;
+        show_dev_navigation 1;
+        root `html:html/templates:../root/moxie:../root`;
+    }
+    controller FileUpload {
+        rel_location fileupload;
+        page_link_label `File Upload`;
+        method do_main is stub {
+        }
+    }
+    controller AjaxRequest {
+        page_link_label `Ajax Request`;
+        rel_location ajaxrequest;
+        method do_version is stub {
+        }
+        method do_badcontent is stub {
+        }
+        method do_content is stub {
+        }
+    }
+    controller AuthCookie {
+        page_link_label AuthCookie;
+        rel_location authcookie;
+        method do_open is stub {
+        }
+        method do_closed is stub {
+        }
+    }
+    controller AuthCookie::SQLite::Closed {
+        page_link_label `AuthCookie w/ SQLite Closed`;
+        rel_location `authcookie/sqlite/closed`;
+        config {
+            auth_deny yes => no_accessor;
+            auth_require `valid-user` => no_accessor;
+        }
+    }
+    controller AuthCookie::SQLite {
+        page_link_label `AuthCookie w/ SQLite`;
+        rel_location `authcookie/sqlite`;
+        method do_open is stub {
+        }
+        method do_closed is stub {
+        }
+        config {
+            auth_optional yes => no_accessor;
+        }
+    }
+    table user {
+        field id {
+            is int4, primary_key, auto;
+        }
+        field active {
+            is int4;
+            label Active;
+            html_form_type select;
+            html_form_options
+                Yes => 1,
+                No => 0;
+        }
+        field username {
+            is varchar;
+            label Username;
+            searchable 1;
+            html_form_type text;
+        }
+        field password {
+            is varchar;
+            label Password;
+            html_form_type password;
+        }
+        field email {
+            is varchar;
+            label Email;
+            html_form_type text;
+            html_form_optional 1;
+            searchable 1;
+        }
+        field fname {
+            is varchar;
+            label Fname;
+            html_form_type text;
+            searchable 1;
+            html_form_optional 1;
+        }
+        field lname {
+            is varchar;
+            label Lname;
+            html_form_type text;
+            searchable 1;
+            html_form_optional 1;
+        }
+        field created {
+            is datetime;
+        }
+        field modified {
+            is datetime;
+        }
+        foreign_display `%username`;
+        data
+            active => 1,
+            username => demo,
+            password => changeme,
+            email => `mars@imapi.com`,
+            fname => `Veronica`,
+            lname => `Mars`;
+        data
+            active => 1,
+            username => test,
+            password => test,
+            email => `test@test.com`,
+            fname => `test`,
+            lname => `test`;
+
+    }
+    controller User is AutoCRUD {
+        controls_table user;
+        rel_location user;
+        text_description user;
+        page_link_label User;
+        method controller_config is hashref {
+            literal `mykey => 'somevalue'`;
+            authed_methods 
+                do_delete => ``;
+        }
+        method do_main is main_listing {
+            cols active, username, email, lname;
+            header_options Add;
+            row_options Groups, Edit, Delete;
+            order_by username;
+            title User;
+            livesearch 1;
+        }
+        method do_groups is stub {
+        }
+        method form is AutoCRUD_form {
+            all_fields_but id, created, modified;
+            extra_keys
+                legend => `$self->path_info =~ /edit/i ? 'Edit' : 'Add'`,
+                submit_and_add_another => 1;
+        }
+    }
+    literal PerlTop
+      `use lib qw( ../lib );`;
+    table user_group {
+        field id {
+            is int4, primary_key, auto;
+        }
+        field ident {
+            is varchar;
+            label `Group Name`;
+            html_form_type text;
+        }
+        field description {
+            is varchar;
+            label Description;
+            html_form_type text;
+            html_form_optional 1;
+        }
+        field created {
+            is datetime;
+        }
+        field modified {
+            is datetime;
+        }
+        foreign_display `%ident`;
+        data
+            ident           => `admin`,
+            description     => `my test admin group`;
+    }
+    controller User::Group is CRUD {
+        controls_table user_group;
+        rel_location `user/group`;
+        text_description `user group`;
+        page_link_label `User Group`;
+        method do_main is main_listing {
+            cols ident, description;
+            header_options Add;
+            row_options Edit, Delete;
+            title `User Group`;
+        }
+        method form is CRUD_form {
+            all_fields_but id, created, modified;
+            extra_keys
+                legend => `$self->path_info =~ /edit/i ? 'Edit' : 'Add'`;
+        }
+    }
+    join_table user_user_group {
+        joins user => user_group;
+    }
+    table item {
+        field id {
+            is int4, primary_key, auto;
+        }
+        field descr {
+            is varchar;
+            label Description;
+            html_form_type text;
+        }
+        field price {
+            is varchar;
+            label Price;
+            html_form_type text;
+        }
+        field user_id {
+            is int4;
+            refers_to user;
+            label Seller;
+            html_form_type select;
+        }
+    }
+    controller TablePermissions is AutoCRUD {
+        page_link_label `Table Permissions`;
+        rel_location table_perms;
+        controls_table item;
+        text_description `item for sale`;
+        config {
+            auth_optional yes => no_accessor;
+            auth_require `valid-user` => no_accessor;
+        }
+        method controller_config is hashref {
+            permissions `crud-rud-r--` => admin;
+        }
+        method do_main is main_listing {
+            cols descr, price, user_id;
+            header_options Add;
+            row_options Edit, Delete;
+            title `Items for Sale`;
+            limit_by user_id;
+        }
+        method form is AutoCRUD_form {
+            all_fields_but id, user_id;
+            extra_keys
+                legend => `$self->path_info =~ /edit/i ? 'Edit' : 'Add'`,
+                submit_and_add_another => 1;
+        }
+    }
+    controller TablePermCRUD is CRUD {
+        page_link_label `Table Permissions Manual CRUD`;
+        rel_location table_perms_crud;
+        controls_table item;
+        text_description `item for sale`;
+        config {
+            auth_optional yes => no_accessor;
+            auth_require `valid-user` => no_accessor;
+        }
+        method controller_config is hashref {
+            permissions `crud-rudcr--` => admin;
+        }
+        method do_main is main_listing {
+            cols descr, price, user_id;
+            header_options Add;
+            row_options Edit, Delete;
+            title `Items for Sale`;
+            limit_by user_id;
+        }
+        method form is CRUD_form {
+            all_fields_but id, user_id;
+            extra_keys
+                legend => `$self->path_info =~ /edit/i ? 'Edit' : 'Add'`,
+                submit_and_add_another => 1;
+        }
+    }
+    controller SOAP {
+        rel_location GantrySoapService;
+        skip_test 1;
+        stub_uses XML::LibXML;
+        method do_f2c is stub {
+        }
+    }
+}

@@ -1,0 +1,34 @@
+use strict; use warnings;
+
+use lib qw( lib ../lib );
+
+use LWP::UserAgent;
+use Gantry::Plugins::SOAP::Doc;
+
+my $f_temp = shift || 68;
+my $url    = 'http://localhost:8080/GantrySoapService/f2c';
+
+my $site = {
+    action_url       => $url,
+    post_to_url      => $url,
+    target_namespace => 'http://sunflower.com/soapns',
+};
+
+my $request_args = [
+    {
+        temperature => [
+            { farenheit => $f_temp },
+        ]
+    },
+];
+
+my $soap_obj    = Gantry::Plugins::SOAP::Doc->new( $site );
+my $request_xml = $soap_obj->soap_out( $request_args, 'internal', 'pretty' );
+
+warn "request:\n$request_xml\n";
+
+my $response = $soap_obj->send_xml( $request_xml );
+
+# response is the return value of LWP::UserAgent's request method.
+warn $response->content() . "\n";
+

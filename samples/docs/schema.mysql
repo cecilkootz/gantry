@@ -1,0 +1,41 @@
+CREATE TABLE user (
+    id MEDIUMINT PRIMARY KEY AUTO_INCREMENT,
+    active MEDIUMINT,
+    username VARCHAR(100),
+    password VARCHAR(100),
+    email VARCHAR(100),
+    fname VARCHAR(100),
+    lname VARCHAR(100),
+    created datetime,
+    modified datetime
+);
+
+INSERT INTO user ( active, username, password, email, fname, lname )
+    VALUES ( 1, 'demo', 'changeme', 'mars@imapi.com', 'Veronica', 'Mars' );
+
+INSERT INTO user ( active, username, password, email, fname, lname )
+    VALUES ( 1, 'test', 'test', 'test@test.com', 'test', 'test' );
+
+CREATE TABLE user_group (
+    id MEDIUMINT PRIMARY KEY AUTO_INCREMENT,
+    ident VARCHAR(100),
+    description VARCHAR(100),
+    created datetime,
+    modified datetime
+);
+
+INSERT INTO user_group ( ident, description )
+    VALUES ( 'admin', 'my test admin group' );
+
+CREATE TABLE user_user_group (
+    id MEDIUMINT PRIMARY KEY AUTO_INCREMENT,
+    user MEDIUMINT,
+    user_group MEDIUMINT
+);
+CREATE TABLE item (
+    id MEDIUMINT PRIMARY KEY AUTO_INCREMENT,
+    descr VARCHAR(100),
+    price VARCHAR(100),
+    user_id MEDIUMINT
+);
+
